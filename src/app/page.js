@@ -1,95 +1,109 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+// "use client";
+// import { useEffect } from "react";
+// import styles from "./page.module.css";
 
-export default function Home() {
+// export default function Home() {
+//   useEffect(() => {
+//     function displayPokemonList() {
+//       fetch("https://pokeapi.co/api/v2/pokemon?limit=1008")
+//         .then((response) => response.json())
+//         .then((data) => {
+//           const pokemonListContainer = document.querySelector("#allPokemonList");
+//           if (!pokemonListContainer) {
+//             console.error("Element with ID 'allPokemonList' not found.");
+//             return;
+//           }
+
+//           const listElement = document.createElement("ul");
+//           listElement.classList.add("pokemon-list");
+
+//           data.results.forEach((pokemon) => {
+//             const listItem = document.createElement("li");
+//             const nameElement = document.createElement("strong");
+//             nameElement.textContent = pokemon.name;
+//             listItem.appendChild(nameElement);
+
+//             fetch(pokemon.url)
+//               .then((response) => response.json())
+//               .then((pokemonData) => {
+//                 const typesElement = document.createElement("div");
+//                 const typesText = "Types: " + pokemonData.types.map(type => `<strong>${type.type.name}</strong>`).join(", ");
+//                 typesElement.innerHTML = typesText;
+//                 listItem.appendChild(typesElement);
+
+//                 const imageElement = document.createElement("img");
+//                 imageElement.src = pokemonData.sprites.front_default;
+//                 listItem.appendChild(imageElement);
+//               })
+//               .catch((error) => {
+//                 console.error("Error fetching pokemon data:", error);
+//               });
+//             listElement.appendChild(listItem);
+//           });
+
+//           pokemonListContainer.appendChild(listElement);
+//         })
+//         .catch((error) => {
+//           console.error("Error fetching pokemon list:", error);
+//         });
+//     }
+
+//     displayPokemonList();
+//   }, []);
+
+//   return (
+//     <div id="allPokemonList" className={styles.page}>
+//       {/* Le contenu de la liste des Pokémon sera ajouté ici */}
+//     </div>
+//   );
+// }
+
+
+// src/app/page.js
+
+// import Card from './components/Card/Card';
+
+import Link from 'next/link';
+
+async function fetchPokemonDetails() {
+  const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10');
+  const data = await res.json();
+  
+  const detailedPokemonList = await Promise.all(
+    data.results.map(async (pokemon) => {
+      const pokemonDetails = await fetch(pokemon.url);
+      const details = await pokemonDetails.json();
+      return {
+        name: details.name,
+        image: details.sprites.front_default,
+        types: details.types.map(type => type.type.name),
+      };
+    })
+  );
+
+  return detailedPokemonList;
+}
+
+export default async function PokemonList() {
+  const pokemonList = await fetchPokemonDetails();
+  
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+    <div>
+      <h1>Liste des Pokémon</h1>
+      <div className="pokemon-list">
+        {pokemonList.map((pokemon) => (
+          <Link href={`/pokemon/${pokemon.name}`} key={pokemon.name}>
+            <div>
+              <h2>{pokemon.name}</h2>
+              <img src={pokemon.image} alt={pokemon.name} />
+              <p>Types: {pokemon.types.join(', ')}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
+
+
+
