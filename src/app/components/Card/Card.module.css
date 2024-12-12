@@ -1,17 +1,75 @@
-.card{
+.card-container{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-
+    height: 80vh;
 }
 
-.image-container{
+.card{
+    /* border: 8px solid #ffe163; */
+    border-radius: 10px;
+}
+
+.image-container {
+    position: relative;
+}
+
+.imagebg-container {
     background-image: url('/paysage.jpg');
     background-size: cover;
     background-position: center;
-    width: 250px;
+    width: 100%;
     height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+}
+
+.header{
+    display: flex;
+    width: 250px;
+    justify-content: space-between;
+}
+
+.azerty{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 7px;
+}
+
+.li{
+    list-style: none;
+}
+
+.p{
+    display: flex;
+    justify-content: center;
+}
+
+.type-fire {
+    background-color: #fddfdf;
+}
+  
+.type-water {
+    /* background-color: #def3fd; */
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    background-image: url('/Pokemon-eau.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
+}
+  
+.type-grass {
+    background-color: #defde0;
 }

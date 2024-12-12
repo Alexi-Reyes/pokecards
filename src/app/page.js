@@ -77,6 +77,7 @@ async function fetchPokemonDetails() {
         name: details.name,
         image: details.sprites.front_default,
         types: details.types.map(type => type.type.name),
+        attaque : details.moves[0].move["name"],
       };
     })
   );

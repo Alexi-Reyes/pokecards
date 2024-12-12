@@ -34,20 +34,34 @@ import styles from './Card.module.css';
 
 export default function Card({ pokemon }) {
   if (!pokemon) return <div>Pokémon non trouvé</div>;
-
+  const typeClass = pokemon.types.length > 0 ? `type-${pokemon.types[0]}` : '';
   return (
-    <div className={styles.card}>
-      <h1>{pokemon.name}</h1>
-      <div className={styles['image-container']}>
-        <img src={pokemon.image} alt={pokemon.name} />
+    <div className={styles['card-container']}> 
+      <div className={`${styles['card']} ${styles[typeClass]}`}>
+        <div className={styles['header']}>
+          <h3>{pokemon.name}</h3>
+          <h3>HP {pokemon.stats[0].base_stat}</h3>
+        </div>
+        
+        <div className={styles['image-container']}>
+          <div className={styles['imagebg-container']}></div>
+          <img src={pokemon.image} alt={pokemon.name} />
+        </div>
+        
+        <p className={styles['p']}>{pokemon.types.join(', ')}</p>
+        <div className={styles['azerty']}>
+          <h3>azerty{pokemon.attaque} {pokemon.stats[1].base_stat}</h3>
+          <h3>{pokemon.stats[2].stat.name} {pokemon.stats[2].base_stat}</h3>
+        </div>
+        <p>Types: {pokemon.types.join(', ')}</p>
+        <p>Statistiques:</p>
+        <ul>
+          <span>{pokemon.stats[0].stat.name}: {pokemon.stats[0].base_stat}</span>
+          {pokemon.stats.map(stat => (
+            <li className={styles['li']} key={stat.stat.name}>{stat.stat.name}: {stat.base_stat}</li>
+          ))}
+        </ul>
       </div>
-      <p>Types: {pokemon.types.join(', ')}</p>
-      <p>Statistiques:</p>
-      <ul>
-        {pokemon.stats.map(stat => (
-          <li key={stat.stat.name}>{stat.stat.name}: {stat.base_stat}</li>
-        ))}
-      </ul>
     </div>
   );
 }
