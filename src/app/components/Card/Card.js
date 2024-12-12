@@ -38,9 +38,14 @@ export default function Card({ pokemon }) {
   return (
     <div className={styles['card-container']}> 
       <div className={`${styles['card']} ${styles[typeClass]}`}>
+        
         <div className={styles['header']}>
-          <h3>{pokemon.name}</h3>
-          <h3>HP {pokemon.stats[0].base_stat}</h3>
+          <h3 className={styles['h3']}>{pokemon.name}</h3>
+          <div className={styles['hp']}>
+            <p className={styles['p']}>HP</p>
+            <h3>{pokemon.stats[0].base_stat}</h3>
+          </div>
+          
         </div>
         
         <div className={styles['image-container']}>
@@ -49,18 +54,35 @@ export default function Card({ pokemon }) {
         </div>
         
         <p className={styles['p']}>{pokemon.types.join(', ')}</p>
-        <div className={styles['azerty']}>
-          <h3>azerty{pokemon.attaque} {pokemon.stats[1].base_stat}</h3>
-          <h3>{pokemon.stats[2].stat.name} {pokemon.stats[2].base_stat}</h3>
+
+
+        <div className={styles['capacite']}>
+
+          <div className={styles['attaque']}>
+            <h3>azerty{pokemon.attaque}</h3>
+            <h3>{pokemon.stats[1].base_stat}</h3>
+            {/* <h3>azerty{pokemon.attaque} {pokemon.stats[1].base_stat}</h3>
+            <h3>{pokemon.stats[2].stat.name} {pokemon.stats[2].base_stat}</h3> */}
+          </div>
+
+          <div className={styles['defense']}>
+            <h3>{pokemon.stats[2].stat.name} </h3> 
+            <h3>{pokemon.stats[2].base_stat}</h3> 
+          </div>
+
         </div>
-        <p>Types: {pokemon.types.join(', ')}</p>
+
+        
+
+
+        {/* <p>Types: {pokemon.types.join(', ')}</p>
         <p>Statistiques:</p>
         <ul>
           <span>{pokemon.stats[0].stat.name}: {pokemon.stats[0].base_stat}</span>
           {pokemon.stats.map(stat => (
             <li className={styles['li']} key={stat.stat.name}>{stat.stat.name}: {stat.base_stat}</li>
           ))}
-        </ul>
+        </ul> */}
       </div>
     </div>
   );

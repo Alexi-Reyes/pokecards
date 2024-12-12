@@ -66,7 +66,7 @@
 import Link from 'next/link';
 
 async function fetchPokemonDetails() {
-  const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10');
+  const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1000');
   const data = await res.json();
   
   const detailedPokemonList = await Promise.all(
