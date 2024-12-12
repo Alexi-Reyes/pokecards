@@ -1,3 +1,14 @@
 .cards-area {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     min-height: 500px;
+}
+
+.button-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
 }

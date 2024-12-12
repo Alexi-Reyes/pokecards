@@ -123,17 +123,19 @@ export default function Boosters() {
                     <Card key={pokemon.id} pokemon={pokemon.id} /> // Render a card for each Pokémon
                 ))}
             </div>
-            <button onClick={openBooster}>Open</button>
-            <select 
-                name="generations" 
-                id="dropdown-gen"
-                value={selectedGeneration}
-                onChange={(event) => setSelectedGeneration(event.target.value)}
-            >
-                {generations.map((gen) => (
-                    <option key={gen.name} value={gen.name}>{gen.name}</option>
-                ))}
-            </select>
+            <div className={styles['button-div']}>
+                <button onClick={openBooster}>Open</button>
+                <select 
+                    name="generations" 
+                    id="dropdown-gen"
+                    value={selectedGeneration}
+                    onChange={(event) => setSelectedGeneration(event.target.value)}
+                >
+                    {generations.map((gen) => (
+                        <option key={gen.name} value={gen.name}>{gen.name}</option>
+                    ))}
+                </select>
+            </div>
         </>
     );
 }

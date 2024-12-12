@@ -1,6 +1,8 @@
 'use client'
 
 import Card from '../../components/Card/Card';
+import Navbar from '../../components/Navbar/navbar'
+import styles from './style.module.css'
 import { useEffect, useState } from 'react';
 
 export default function PokemonDetail({ params }) {
@@ -32,6 +34,11 @@ export default function PokemonDetail({ params }) {
     if (error) return <div>Error: {error}</div>;
   
     return (
-        <Card pokemon={pokemonData.name} />
+        <>
+            <Navbar />
+            <div className={styles['page-content']}>
+                <Card pokemon={pokemonData.name} />
+            </div>
+        </>
     );
 }
