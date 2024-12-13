@@ -1,9 +1,24 @@
+.card-container {
+    perspective: 1000px;
+    position: relative;
+}
+
 .card {
+    position: relative;
+    overflow: hidden; 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    transform-style: preserve-3d; 
     border-radius: 18px;
+    z-index: 1;
+}
+
+.card:hover {
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
 }
 
 .locked {
-    /* filter: grayscale(100%); */
+    filter: grayscale(100%);
 }
 
 .card-pokemon-name {
@@ -28,13 +43,10 @@
     background-position: center;
     width: 100%;
     height: 190px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: absolute;
     top: 0px;
     left: 0px;
-    z-index: -1;
+    z-index: -99999999999999999999999999999999999999999999999999999;
 }
 
 .types {
@@ -42,7 +54,6 @@
     width: 100%;
     justify-content: center;
     margin-top: 25px;
-    z-index: 9999999999;
     position: relative;
     gap: 5px;
 }
@@ -80,6 +91,25 @@
     font-weight: bold;
     font-style: italic;
 }
+
+/* .shiny {
+    border: transparent;
+}
+
+.shiny::after {
+    opacity: 1;
+    background-image: url("https://assets.codepen.io/13471/sparkles.gif"), 
+      url(https://assets.codepen.io/13471/holo.png), 
+      linear-gradient(125deg, #ff008450 15%, #fca40040 30%, #ffff0030 40%, #00ff8a20 60%, #00cfff40 70%, #cc4cfa50 85%);
+    background-position: 50% 50%;
+    background-size: 160%;
+    background-blend-mode: overlay;
+    z-index: 2;
+    filter: brightness(1) contrast(1);
+    transition: all .33s ease;
+    mix-blend-mode: color-dodge;
+    opacity: .75;
+} */
 
 /* Card Type */
 
@@ -205,7 +235,7 @@
 }
 
 .card-type-dark {
-    background-image: url('/Cards-template/dark.png');
+    background-image: url('/Cards-template/dark.jpg');
     color: whitesmoke;
     background-repeat: no-repeat;
     background-size: cover;

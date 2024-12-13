@@ -5,6 +5,11 @@
     margin-inline: 20px;
 }
 
+.collection-heading {
+    display: flex;
+    gap: 10px;
+}
+
 .collection-title {
     padding: 10px;
 }

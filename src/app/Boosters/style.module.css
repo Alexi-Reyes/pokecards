@@ -1,7 +1,12 @@
+.page-title {
+    margin-left: 10px;
+}
+
 .cards-area {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     min-height: 500px;
+    padding-inline: 20px;
 }
 
 .button-div {

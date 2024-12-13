@@ -2,6 +2,7 @@
 
 import Navbar from '../components/Navbar/navbar'
 import Card from '../components/Card/card'
+import Loading from '../components/Loading/loading';
 import styles from './style.module.css'
 import { useEffect, useState } from 'react';
 
@@ -88,7 +89,7 @@ export default function Boosters() {
             localStoragePokemon = []
         }
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 4; i++) {
             const randomIndex = Math.floor(Math.random() * pokemonOfGenNumber);
             const gottenPokemon = pokemonOfGen[randomIndex];
 
@@ -111,13 +112,13 @@ export default function Boosters() {
         console.log("Pokémon of booster:", selectedPokemon);
     };
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <Loading />;
     if (error) return <div>Error: {error}</div>;
 
     return (
         <>
             <Navbar />
-            <h2>Boosters</h2>
+            <h2 className={styles['page-title']}>Boosters</h2>
             <div className={styles['cards-area']}>
                 {showCards && pokemonOfBooster.map((pokemon) => (
                     <Card key={pokemon.id} pokemon={pokemon.id} /> // Render a card for each Pokémon
@@ -129,8 +130,11 @@ export default function Boosters() {
                     name="generations" 
                     id="dropdown-gen"
                     value={selectedGeneration}
-                    onChange={(event) => setSelectedGeneration(event.target.value)}
+                    onChange={(event) => event.target.value == 'none'
+                         ? document.getElementsByClassName('button-div')[0].setAttribute("disabled", "disabled")
+                          : setSelectedGeneration(event.target.value)}
                 >
+                    <option value="none">Select Generation</option>
                     {generations.map((gen) => (
                         <option key={gen.name} value={gen.name}>{gen.name}</option>
                     ))}

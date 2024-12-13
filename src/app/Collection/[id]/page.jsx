@@ -2,6 +2,7 @@
 
 import Card from '../../components/Card/Card';
 import Navbar from '../../components/Navbar/navbar'
+import Loading from '../../components/Loading/loading';
 import styles from './style.module.css'
 import { useEffect, useState } from 'react';
 
@@ -30,7 +31,7 @@ export default function PokemonDetail({ params }) {
         fetchData();
     }, [id]);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <Loading />;
     if (error) return <div>Error: {error}</div>;
   
     return (
