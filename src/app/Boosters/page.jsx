@@ -72,6 +72,8 @@ export default function Boosters() {
     };
 
     const openBooster = () => {
+        if (loading) return <Loading />;
+
         if (pokemonOfGen.length === 0) {
             console.log("No Pokémon available to open.");
             return;
@@ -120,8 +122,8 @@ export default function Boosters() {
             <Navbar />
             <h2 className={styles['page-title']}>Boosters</h2>
             <div className={styles['cards-area']}>
-                {showCards && pokemonOfBooster.map((pokemon) => (
-                    <Card key={pokemon.id} pokemon={pokemon.id} /> // Render a card for each Pokémon
+                {showCards && pokemonOfBooster.map((pokemon, index) => (
+                    <Card key={index} pokemon={pokemon.id} /> // Render a card for each Pokémon
                 ))}
             </div>
             <div className={styles['button-div']}>

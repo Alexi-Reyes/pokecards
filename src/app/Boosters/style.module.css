@@ -9,6 +9,12 @@
     padding-inline: 20px;
 }
 
+@media (max-width: 768px) {
+    .cards-area {
+       display: block;
+    }
+}
+
 .button-div {
     display: flex;
     justify-content: center;

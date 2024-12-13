@@ -65,16 +65,6 @@ export default async function Collection({ params }) {
         <Navbar></Navbar>
         <div className={styles['collection-heading']}>
             <h2 className={styles['collection-title']}>My Collection</h2>
-            {/* <select 
-                name="generations" 
-                id="dropdown-gen"
-                onChange={(event) => router.push(`/Collection/${event.target.value}`)}
-            >
-                <option value="none">Select Generation</option>
-                {generations.map((gen) => (
-                    <option key={gen.name} value={gen.name}>{gen.name}</option>
-                ))}
-            </select> */}
             <Selector generations={generations} gen={gen} />
         </div>
         
