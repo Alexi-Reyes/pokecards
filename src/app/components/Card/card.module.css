@@ -92,24 +92,331 @@
     font-style: italic;
 }
 
-/* .shiny {
-    border: transparent;
+.shiny {
+    position: relative;
+    transition: box-shadow 0.5s ease-in-out;
 }
 
 .shiny::after {
-    opacity: 1;
-    background-image: url("https://assets.codepen.io/13471/sparkles.gif"), 
-      url(https://assets.codepen.io/13471/holo.png), 
-      linear-gradient(125deg, #ff008450 15%, #fca40040 30%, #ffff0030 40%, #00ff8a20 60%, #00cfff40 70%, #cc4cfa50 85%);
-    background-position: 50% 50%;
-    background-size: 160%;
-    background-blend-mode: overlay;
-    z-index: 2;
-    filter: brightness(1) contrast(1);
-    transition: all .33s ease;
-    mix-blend-mode: color-dodge;
-    opacity: .75;
-} */
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    border-radius: 8px; 
+    filter: blur(10px);
+    opacity: 0.5;
+    animation: shiny-animation 5s linear infinite;    
+}
+
+@keyframes shiny-animation {
+    0% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    1% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    2% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    3% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    4% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    5% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    6% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    7% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    8% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    9% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    10% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    11% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    12% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    13% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    14% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    15% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    16% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    17% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    18% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    19% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    20% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    21% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    22% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    23% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    24% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    25% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    26% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    27% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    28% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    29% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    30% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    31% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    32% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    33% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    34% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    35% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    36% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    37% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    38% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    39% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    40% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    41% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    42% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    43% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    44% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    45% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    46% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    47% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    48% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    49% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    50% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    51% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    52% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    53% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    54% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    55% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    56% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    57% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    58% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    59% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    60% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    61% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    62% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    63% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    64% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    65% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    66% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    67% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    68% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    69% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    70% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    71% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    72% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    73% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    74% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    75% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    76% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    77% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    78% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    79% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    80% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    81% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    82% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    83% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    84% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    85% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    86% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    87% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    88% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    89% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    90% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    91% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    92% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    93% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    94% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    95% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    96% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    97% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    98% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    99% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    100% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+}
 
 /* Card Type */
 

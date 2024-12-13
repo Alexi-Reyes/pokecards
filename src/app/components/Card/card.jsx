@@ -1,3 +1,5 @@
+'use client'
+
 import styles from './card.module.css';
 import Image from 'next/image';
 import Loading from '../Loading/loading';

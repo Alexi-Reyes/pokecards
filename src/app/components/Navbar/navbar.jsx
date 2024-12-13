@@ -11,7 +11,7 @@ export default function About() {
                 <Link href="/Boosters">
                     <button className={[styles['nav-button'], styles['boosters-button']].join(' ')}>Boosters</button>
                 </Link>
-                <Link href="/Collection">
+                <Link href="/Collection/0">
                     <button className={[styles['nav-button'], styles['collection-button']].join(' ')}>Collection</button>
                 </Link>
             </div>

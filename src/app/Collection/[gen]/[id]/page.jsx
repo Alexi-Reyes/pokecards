@@ -1,8 +1,8 @@
 'use client'
 
-import Card from '../../components/Card/Card';
-import Navbar from '../../components/Navbar/navbar'
-import Loading from '../../components/Loading/loading';
+import Card from '../../../components/Card/Card';
+import Navbar from '../../../components/Navbar/navbar'
+import Loading from '../../../components/Loading/loading';
 import styles from './style.module.css'
 import { useEffect, useState } from 'react';
 
