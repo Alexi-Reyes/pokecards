@@ -6,30 +6,7 @@ import Loading from "../Loading/loading";
 import styles from "./card.module.css";
 import { AppConfig } from "@/app/config";
 
-type PokemonType = { type: { name: string } };
-type PokemonMove = { move: { name: string } };
-type PokemonStat = { base_stat: number };
-type PokemonSprites = {
-    other?: {
-        "official-artwork"?: {
-            front_default?: string | null;
-            front_shiny?: string | null;
-        };
-    };
-};
-
-type PokemonData = {
-    id: number;
-    name: string;
-    order: number;
-    types: PokemonType[];
-    moves: PokemonMove[];
-    stats: PokemonStat[];
-    sprites: PokemonSprites;
-};
-
-type PokemonApiResponse = { data: PokemonData };
-type UnlockedPokemon = { id: number; is_shiny: boolean };
+import type { PokemonData, UnlockedPokemon, ApiResponse, PokemonType } from "@/types";
 
 type CardProps = { pokemon: string | number };
 
@@ -47,7 +24,7 @@ export default function Card({ pokemon }: CardProps) {
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
-                const result: PokemonApiResponse = await response.json();
+                const result: ApiResponse<PokemonData> = await response.json();
 
                 setPokemonData(result.data);
 
@@ -139,7 +116,7 @@ export default function Card({ pokemon }: CardProps) {
                     />
                 </div>
                 <ul className={styles.types}>
-                    {types.map((type, index) => (
+                    {types.map((type: PokemonType, index: number) => (
                         <li
                             key={`type-${index}`}
                             className={[styles.type, styles[`type-${type.type.name}`]].join(" ")}

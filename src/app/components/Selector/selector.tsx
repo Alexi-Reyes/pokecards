@@ -3,10 +3,10 @@
 import type { ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
 
-type Generation = { name: string };
+import type { GenerationBasicInfo } from "@/types";
 
 type SelectorProps = {
-    generations: Generation[];
+    generations: GenerationBasicInfo[];
     gen?: string;
 };
 

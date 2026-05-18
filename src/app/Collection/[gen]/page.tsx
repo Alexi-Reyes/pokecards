@@ -5,67 +5,14 @@ import Selector from "../../components/Selector/selector";
 import styles from "./style.module.css";
 import { AppConfig } from "@/app/config";
 
-type Generation = { name: string };
-type PokemonData = { id: number; name: string };
-
-type GenerationListResponse = { data: { results: Generation[] } };
-type GenerationDetailResponse = { data: { pokemon_species: Array<{ url: string }> } };
-type PokemonResponse = { data: PokemonData };
-
-const getGenerations = async (): Promise<Generation[]> => {
-    try {
-        const response = await fetch(`${AppConfig.localApiUrl}/generations`);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const result: GenerationListResponse = await response.json();
-        return result.data.results;
-    } catch (error) {
-        console.log(error instanceof Error ? error.message : "Unknown error");
-        return [];
-    }
-};
-
-const getPokemonByGeneration = async (gen: string): Promise<PokemonData[]> => {
-    try {
-        const response = await fetch(`${AppConfig.localApiUrl}/generations/${gen}`);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const result: GenerationDetailResponse = await response.json();
-        const pokemonPromises = result.data.pokemon_species.map(async (pokemon) => {
-            const extractedPokemonId = pokemon.url.match(/(\d+)(?=\/$)/)?.[0];
-            if (!extractedPokemonId) return null;
-            return await getPokemon(extractedPokemonId);
-        });
-        const pokemonData = await Promise.all(pokemonPromises);
-        return pokemonData.filter(Boolean) as PokemonData[];
-    } catch (error) {
-        console.log(error instanceof Error ? error.message : "Unknown error");
-        return [];
-    }
-};
-
-const getPokemon = async (pokemon: string): Promise<PokemonData | null> => {
-    try {
-        const response = await fetch(`${AppConfig.localApiUrl}/pokemon/${pokemon}`);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const result: PokemonResponse = await response.json();
-        return result.data;
-    } catch (error) {
-        console.log(error instanceof Error ? error.message : "Unknown error");
-        return null;
-    }
-};
-
+import type { GenerationBasicInfo, PokemonData, ApiResponse, PaginatedResponse } from "@/types";
+import { getPokemonByGeneration, getGenerations } from "@/adapters/generationAdapter";
+import { getPokemon } from "@/adapters/pokemonAdapter";
 
 export default async function Collection({ params }: { params: { gen: string } }) {
     const { gen } = params;
     const generations = await getGenerations();
-    const pokemonOfGen = await getPokemonByGeneration(gen);
-    console.log(pokemonOfGen)
+    const pokemonOfGen = gen !== "0" ? await getPokemonByGeneration(gen) : [];
 
     return (
         <>
@@ -78,12 +25,12 @@ export default async function Collection({ params }: { params: { gen: string } }
         <div className={styles['collection-grid']}>
             {
             gen !== "0" ?
-                pokemonOfGen.map((poke) => (
+                pokemonOfGen.map((pokeName) => (
                     <Link 
-                        key={poke.name}
-                        href={`/Collection/${gen}/${poke.name}`}
+                        key={pokeName}
+                        href={`/Collection/${gen}/${pokeName}`}
                     >
-                        <Card pokemon={poke.name} />
+                        <Card pokemon={pokeName} />
                     </Link>
                 )) : null
             }
