@@ -1,5 +1,5 @@
 export async function GET() {
-    const request = "https://pokeapi.co/api/v2/pokemon?limit=100&offset=0."
+    const request = "https://pokeapi.co/api/v2/pokemon?limit=100&offset=0"
 
     try {
         const res = await fetch(request);
