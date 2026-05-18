@@ -1,16 +1,19 @@
-'use client'
+"use client";
 
-import Card from '../../../components/Card/Card';
-import Navbar from '../../../components/Navbar/navbar'
-import Loading from '../../../components/Loading/loading';
-import styles from './style.module.css'
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import Card from "../../../components/Card/card";
+import Loading from "../../../components/Loading/loading";
+import Navbar from "../../../components/Navbar/navbar";
+import styles from "./style.module.css";
 
-export default function PokemonDetail({ params }) {
-    const { id } =  params;
-    const [pokemonData, setPokemonData] = useState([]);
+type PokemonData = { name: string };
+type PokemonResponse = { data: PokemonData };
+
+export default function PokemonDetail({ params }: { params: { id: string } }) {
+    const { id } = params;
+    const [pokemonData, setPokemonData] = useState<PokemonData | null>(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,10 +22,10 @@ export default function PokemonDetail({ params }) {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                const result = await response.json();
+                const result: PokemonResponse = await response.json();
                 setPokemonData(result.data);
             } catch (error) {
-                setError(error.message);
+                setError(error instanceof Error ? error.message : "Unknown error");
             } finally {
                 setLoading(false);
             }
@@ -33,6 +36,7 @@ export default function PokemonDetail({ params }) {
 
     if (loading) return <Loading />;
     if (error) return <div>Error: {error}</div>;
+    if (!pokemonData) return <div>No data.</div>;
   
     return (
         <>
