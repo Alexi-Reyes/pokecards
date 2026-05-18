@@ -3,6 +3,7 @@ import Card from "../../components/Card/card";
 import Navbar from "../../components/Navbar/navbar";
 import Selector from "../../components/Selector/selector";
 import styles from "./style.module.css";
+import { AppConfig } from "@/app/config";
 
 type Generation = { name: string };
 type PokemonData = { id: number; name: string };
@@ -13,7 +14,7 @@ type PokemonResponse = { data: PokemonData };
 
 const getGenerations = async (): Promise<Generation[]> => {
     try {
-        const response = await fetch(`http://localhost:3000/api/generations`);
+        const response = await fetch(`${AppConfig.localApiUrl}/generations`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -27,7 +28,7 @@ const getGenerations = async (): Promise<Generation[]> => {
 
 const getPokemonByGeneration = async (gen: string): Promise<PokemonData[]> => {
     try {
-        const response = await fetch(`http://localhost:3000/api/generations/${gen}`);
+        const response = await fetch(`${AppConfig.localApiUrl}/generations/${gen}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -47,7 +48,7 @@ const getPokemonByGeneration = async (gen: string): Promise<PokemonData[]> => {
 
 const getPokemon = async (pokemon: string): Promise<PokemonData | null> => {
     try {
-        const response = await fetch(`http://localhost:3000/api/pokemon/${pokemon}`);
+        const response = await fetch(`${AppConfig.localApiUrl}/pokemon/${pokemon}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }

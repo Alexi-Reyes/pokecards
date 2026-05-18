@@ -5,6 +5,7 @@ import Card from "../components/Card/card";
 import Loading from "../components/Loading/loading";
 import Navbar from "../components/Navbar/navbar";
 import styles from "./style.module.css";
+import { AppConfig } from "../config";
 
 type Generation = { name: string };
 type PokemonData = { id: number; name: string };
@@ -26,7 +27,7 @@ export default function Boosters() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/api/generations');
+                const response = await fetch(`${AppConfig.localApiUrl}/generations`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -47,7 +48,7 @@ export default function Boosters() {
             if (!selectedGeneration || selectedGeneration === "none") return;
 
             try {
-                const response = await fetch(`http://localhost:3000/api/generations/${selectedGeneration}`);
+                const response = await fetch(`${AppConfig.localApiUrl}/generations/${selectedGeneration}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -69,7 +70,7 @@ export default function Boosters() {
 
     const getPokemon = async (pokemon: string): Promise<PokemonData | null> => {
         try {
-            const response = await fetch(`http://localhost:3000/api/pokemon/${pokemon}`);
+            const response = await fetch(`${AppConfig.localApiUrl}/pokemon/${pokemon}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

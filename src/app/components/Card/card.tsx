@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState, type MouseEvent } from "react";
 import Loading from "../Loading/loading";
 import styles from "./card.module.css";
+import { AppConfig } from "@/app/config";
 
 type PokemonType = { type: { name: string } };
 type PokemonMove = { move: { name: string } };
@@ -42,7 +43,7 @@ export default function Card({ pokemon }: CardProps) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/pokemon/${pokemon}`);
+                const response = await fetch(`${AppConfig.localApiUrl}/pokemon/${pokemon}`);
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }

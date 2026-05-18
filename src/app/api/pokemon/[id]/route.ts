@@ -1,3 +1,4 @@
+import { AppConfig } from "@/app/config";
 import { NextResponse } from "next/server";
 
 export async function GET(
@@ -9,7 +10,7 @@ export async function GET(
         return new Response('No ID provided', { status: 400 });
     }
 
-    const request = `https://pokeapi.co/api/v2/pokemon/${id}`
+    const request = `${AppConfig.apiUrl}/pokemon/${id}`
 
     try {
         const res = await fetch(request);

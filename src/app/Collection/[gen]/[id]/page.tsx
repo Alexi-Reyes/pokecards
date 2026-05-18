@@ -5,6 +5,7 @@ import Card from "../../../components/Card/card";
 import Loading from "../../../components/Loading/loading";
 import Navbar from "../../../components/Navbar/navbar";
 import styles from "./style.module.css";
+import { AppConfig } from "@/app/config";
 
 type PokemonData = { name: string };
 type PokemonResponse = { data: PokemonData };
@@ -18,7 +19,7 @@ export default function PokemonDetail({ params }: { params: { id: string } }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/pokemon/${id}`);
+                const response = await fetch(`${AppConfig.localApiUrl}/pokemon/${id}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
