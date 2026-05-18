@@ -7,16 +7,12 @@ import Navbar from "../components/Navbar/navbar";
 import styles from "./style.module.css";
 import { AppConfig } from "../config";
 
-type Generation = { name: string };
-type PokemonData = { id: number; name: string };
-type UnlockedPokemon = { id: number; is_shiny: boolean };
-
-type GenerationListResponse = { data: { results: Generation[] } };
-type GenerationDetailResponse = { data: { pokemon_species: Array<{ url: string }> } };
-type PokemonResponse = { data: PokemonData };
+import type { GenerationBasicInfo, PokemonData, UnlockedPokemon, ApiResponse } from "@/types";
+import { getGenerations, getGeneration } from "@/adapters/generationAdapter";
+import { getPokemon } from "@/adapters/pokemonAdapter";
 
 export default function Boosters() {
-    const [generations, setGenerations] = useState<Generation[]>([]);
+    const [generations, setGenerations] = useState<GenerationBasicInfo[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [selectedGeneration, setSelectedGeneration] = useState("none");
@@ -25,14 +21,10 @@ export default function Boosters() {
     const [showCards, setShowCards] = useState(false);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchGenerations = async () => {
             try {
-                const response = await fetch(`${AppConfig.localApiUrl}/generations`);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const result: GenerationListResponse = await response.json();
-                setGenerations(result.data.results);
+                const results = await getGenerations();
+                setGenerations(results);
             } catch (error) {
                 setError(error instanceof Error ? error.message : "Unknown error");
             } finally {
@@ -40,23 +32,19 @@ export default function Boosters() {
             }
         };
 
-        fetchData();
+        fetchGenerations();
     }, []);
 
     useEffect(() => {
-        const getPokemonByGeneration = async () => {
+        const fetchPokemonByGeneration = async () => {
             if (!selectedGeneration || selectedGeneration === "none") return;
 
             try {
-                const response = await fetch(`${AppConfig.localApiUrl}/generations/${selectedGeneration}`);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const result: GenerationDetailResponse = await response.json();
-                const pokemonPromises = result.data.pokemon_species.map(async (pokemon) => {
-                    const extractedPokemonId = pokemon.url.match(/(\d+)(?=\/$)/)?.[0];
+                const generation = await getGeneration(selectedGeneration);
+                const pokemonPromises = generation.pokemonSpecies.map(async (species) => {
+                    const extractedPokemonId = species.url.match(/(\d+)(?=\/$)/)?.[0];
                     if (!extractedPokemonId) return null;
-                    return await getPokemon(extractedPokemonId);
+                    return (await getPokemon(extractedPokemonId)) as unknown as PokemonData;
                 });
                 const pokemonData = await Promise.all(pokemonPromises);
                 setPokemonOfGen(pokemonData.filter(Boolean) as PokemonData[]);
@@ -65,22 +53,8 @@ export default function Boosters() {
             }
         };
 
-        getPokemonByGeneration();
+        fetchPokemonByGeneration();
     }, [selectedGeneration]);
-
-    const getPokemon = async (pokemon: string): Promise<PokemonData | null> => {
-        try {
-            const response = await fetch(`${AppConfig.localApiUrl}/pokemon/${pokemon}`);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const result: PokemonResponse = await response.json();
-            return result.data;
-        } catch (error) {
-            setError(error instanceof Error ? error.message : "Unknown error");
-            return null;
-        }
-    };
 
     const openBooster = () => {
         if (loading) return;

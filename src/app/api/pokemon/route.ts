@@ -1,4 +1,5 @@
 import { AppConfig } from "@/app/config";
+import { NextResponse } from "next/server";
 
 export async function GET() {
     const request = `${AppConfig.apiUrl}/pokemon?limit=${AppConfig.pageSize}&offset=0`
@@ -7,12 +8,12 @@ export async function GET() {
         const res = await fetch(request);
         if (res.ok) {
             const data = await res.json();
-            return Response.json({ data });
+            return NextResponse.json({ data });
         } else {
-            return new Response('Pokemons not found', { status: 404 });
+            return NextResponse.json({ error: 'Pokemons not found' }, { status: 404 });
         }
     } catch (error) {
         console.error("Error fetching Pokemons:", error);
-        return new Response('Internal Server Error', { status: 500 });
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }
