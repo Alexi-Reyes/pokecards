@@ -1,3 +1,4 @@
+import { AppConfig } from "@/app/config";
 import { NextResponse } from "next/server";
 
 export async function GET(_request: Request, { params }: { params: { id: string } }) {
@@ -6,7 +7,7 @@ export async function GET(_request: Request, { params }: { params: { id: string 
         return new Response('No ID provided', { status: 400 });
     }
 
-    const request = `https://pokeapi.co/api/v2/generation/${id}`
+    const request = `${AppConfig.apiUrl}/generation/${id}`
 
     try {
         const res = await fetch(request);

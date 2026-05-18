@@ -1,5 +1,7 @@
+import { AppConfig } from "@/app/config";
+
 export async function GET() {
-    const request = "https://pokeapi.co/api/v2/generation"
+    const request = `${AppConfig.apiUrl}/generation`
 
     try {
         const res = await fetch(request);

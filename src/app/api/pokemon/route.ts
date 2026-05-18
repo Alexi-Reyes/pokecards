@@ -1,5 +1,7 @@
+import { AppConfig } from "@/app/config";
+
 export async function GET() {
-    const request = "https://pokeapi.co/api/v2/pokemon?limit=100&offset=0"
+    const request = `${AppConfig.apiUrl}/pokemon?limit=${AppConfig.pageSize}&offset=0`
 
     try {
         const res = await fetch(request);
