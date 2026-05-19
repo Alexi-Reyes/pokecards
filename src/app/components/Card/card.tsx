@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useEffect, useState, type MouseEvent } from 'react';
 import Loading from '../Loading/loading';
 import styles from './card.module.css';
-import { AppConfig } from '@/app/config';
+import { AppConfig } from '@/config';
 
 import type { PokemonData, UnlockedPokemon, ApiResponse, PokemonType } from '@/types';
 

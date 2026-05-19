@@ -1,4 +1,5 @@
 import { Pokemon, PokemonListItem, PokemonData } from '@/types/pokemon';
+import { AppConfig } from '@/config';
 
 export const adaptPokemon = (data: PokemonData): Pokemon => {
   return {
@@ -32,13 +33,10 @@ export const adaptPokemonList = (data: any): PokemonListItem[] => {
   });
 };
 
-const getBaseUrl = () => {
-  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
-};
 
 export const getPokemons = async (): Promise<PokemonListItem[]> => {
   try {
-    const response = await fetch(`${getBaseUrl()}/api/pokemon`);
+    const response = await fetch(`${AppConfig.localApiUrl}/pokemon`);
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const result = await response.json();
     return adaptPokemonList(result.data);
@@ -50,7 +48,7 @@ export const getPokemons = async (): Promise<PokemonListItem[]> => {
 
 export const getPokemon = async (id: string | number): Promise<Pokemon> => {
   try {
-    const response = await fetch(`${getBaseUrl()}/api/pokemon/${id}`);
+    const response = await fetch(`${AppConfig.localApiUrl}/pokemon/${id}`);
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const result = await response.json();
     return adaptPokemon(result.data);
