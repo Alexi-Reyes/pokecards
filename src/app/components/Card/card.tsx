@@ -7,7 +7,8 @@ import styles from './card.module.css';
 import { AppConfig } from '@/config';
 import { withLocked, withShiny } from '@/decorators/cardDecorators';
 
-import type { PokemonData, UnlockedPokemon, ApiResponse, PokemonType, CardFrameComponent } from '@/types';
+import type { PokemonData, ApiResponse, PokemonType, CardFrameComponent } from '@/types';
+import { unlockedPokemonRepository } from '@/repositories/unlockedPokemonRepository';
 
 type CardProps = { pokemon: string | number };
 
@@ -38,22 +39,9 @@ export default function Card({ pokemon }: CardProps) {
 
         setPokemonData(result.data);
 
-        const localStorageKey = 'unlockedPokemons';
-        const stored = localStorage.getItem(localStorageKey);
-        let localStoragePokemon: UnlockedPokemon[] = [];
-
-        if (stored) {
-          localStoragePokemon = JSON.parse(stored) as UnlockedPokemon[];
-        }
-
-        const foundPokemon = localStoragePokemon.find((entry) => entry.id === result.data.id);
-        if (foundPokemon) {
-          setIsUnlocked(true);
-          setIsShiny(foundPokemon.is_shiny);
-        } else {
-          setIsUnlocked(false);
-          setIsShiny(false);
-        }
+        const foundPokemon = unlockedPokemonRepository.find(result.data.id);
+        setIsUnlocked(!!foundPokemon);
+        setIsShiny(foundPokemon?.is_shiny ?? false);
       } catch (error) {
         setError(error instanceof Error ? error.message : 'Unknown error');
       } finally {
