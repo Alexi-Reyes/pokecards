@@ -1,5 +1,6 @@
 import { AppConfig } from '@/config';
 import { NextResponse } from 'next/server';
+import { cachedFetch } from '@/proxy/apiCache';
 
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -7,16 +8,18 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
     return NextResponse.json({ error: 'No ID provided' }, { status: 400 });
   }
 
-  const request = `${AppConfig.apiUrl}/generation/${id}`;
-
   try {
-    const res = await fetch(request);
-    if (res.ok) {
-      const data = await res.json();
-      return NextResponse.json({ data });
-    } else {
+    const data = await cachedFetch(`generation:${id}`, async () => {
+      const res = await fetch(`${AppConfig.apiUrl}/generation/${id}`);
+      if (!res.ok) return null;
+      return await res.json();
+    });
+
+    if (!data) {
       return NextResponse.json({ error: 'No generation found' }, { status: 404 });
     }
+
+    return NextResponse.json({ data });
   } catch (error) {
     console.error('Error fetching Generations:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
