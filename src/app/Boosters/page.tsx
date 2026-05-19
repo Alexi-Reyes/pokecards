@@ -6,9 +6,10 @@ import Loading from '../components/Loading/loading';
 import Navbar from '../components/Navbar/navbar';
 import styles from './style.module.css';
 
-import type { GenerationBasicInfo, PokemonData, UnlockedPokemon } from '@/types';
+import type { GenerationBasicInfo, PokemonData } from '@/types';
 import { pokemonAdapter } from '@/adapters/pokemonAdapter';
 import { generationAdapter } from '@/adapters/generationAdapter';
+import { standardBoosterFactory, type BoosterCard } from '@/factories/BoosterFactory';
 
 export default function Boosters() {
   const [generations, setGenerations] = useState<GenerationBasicInfo[]>([]);
@@ -16,7 +17,7 @@ export default function Boosters() {
   const [error, setError] = useState<string | null>(null);
   const [selectedGeneration, setSelectedGeneration] = useState('none');
   const [pokemonOfGen, setPokemonOfGen] = useState<PokemonData[]>([]);
-  const [pokemonOfBooster, setPokemonOfBooster] = useState<PokemonData[]>([]);
+  const [pokemonOfBooster, setPokemonOfBooster] = useState<BoosterCard[]>([]);
   const [showCards, setShowCards] = useState(false);
 
   useEffect(() => {
@@ -56,42 +57,10 @@ export default function Boosters() {
   }, [selectedGeneration]);
 
   const openBooster = () => {
-    if (loading) return;
+    if (loading || pokemonOfGen.length === 0) return;
 
-    if (pokemonOfGen.length === 0) {
-      console.log('No Pokémon available to open.');
-      return;
-    }
-
-    let selectedPokemon = [];
-    const pokemonOfGenNumber = pokemonOfGen.length;
-
-    const localStorageKey = 'unlockedPokemons';
-    const stored = localStorage.getItem(localStorageKey);
-    let localStoragePokemon: UnlockedPokemon[] = [];
-    if (stored) {
-      localStoragePokemon = JSON.parse(stored) as UnlockedPokemon[];
-    }
-
-    for (let i = 0; i < 4; i++) {
-      const randomIndex = Math.floor(Math.random() * pokemonOfGenNumber);
-      const gottenPokemon = pokemonOfGen[randomIndex];
-
-      const isAlreadyUnlocked = localStoragePokemon.some((entry) => entry.id === gottenPokemon.id);
-      if (!isAlreadyUnlocked) {
-        const is_Shiny = Math.random() <= 0.1;
-        const unlockedPokemon = {
-          id: gottenPokemon.id,
-          is_shiny: is_Shiny,
-        };
-
-        localStoragePokemon.push(unlockedPokemon);
-        localStorage.setItem(localStorageKey, JSON.stringify(localStoragePokemon));
-      }
-      selectedPokemon.push(gottenPokemon);
-    }
-
-    setPokemonOfBooster(selectedPokemon);
+    const booster = standardBoosterFactory.open(pokemonOfGen);
+    setPokemonOfBooster(booster.cards);
     setShowCards(true);
   };
 
@@ -104,8 +73,8 @@ export default function Boosters() {
       <h2 className={styles['page-title']}>Boosters</h2>
       <div className={styles['cards-area']}>
         {showCards &&
-          pokemonOfBooster.map((pokemon, index) => (
-            <Card key={`${pokemon.id}-${index}`} pokemon={pokemon.id} />
+          pokemonOfBooster.map((card, index) => (
+            <Card key={`${card.id}-${index}`} pokemon={card.id} />
           ))}
       </div>
       <div className={styles['button-div']}>
