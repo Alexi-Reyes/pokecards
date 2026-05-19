@@ -123,6 +123,7 @@ export default function Card({ pokemon }: CardProps) {
             src={spriteUrl || '/pokeball.svg'}
             width={100}
             height={100}
+            className={styles.sprite}
             style={{
               height: '100%',
               width: 'auto',
