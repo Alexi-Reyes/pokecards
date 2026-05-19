@@ -7,8 +7,8 @@ import Navbar from '../components/Navbar/navbar';
 import styles from './style.module.css';
 
 import type { GenerationBasicInfo, PokemonData, UnlockedPokemon } from '@/types';
-import { getGenerations, getGeneration } from '@/adapters/generationAdapter';
-import { getPokemon } from '@/adapters/pokemonAdapter';
+import { pokemonAdapter } from '@/adapters/pokemonAdapter';
+import { generationAdapter } from '@/adapters/generationAdapter';
 
 export default function Boosters() {
   const [generations, setGenerations] = useState<GenerationBasicInfo[]>([]);
@@ -22,7 +22,7 @@ export default function Boosters() {
   useEffect(() => {
     const fetchGenerations = async () => {
       try {
-        const results = await getGenerations();
+        const results = await generationAdapter.getAll();
         setGenerations(results);
       } catch (error) {
         setError(error instanceof Error ? error.message : 'Unknown error');
@@ -39,11 +39,11 @@ export default function Boosters() {
       if (!selectedGeneration || selectedGeneration === 'none') return;
 
       try {
-        const generation = await getGeneration(selectedGeneration);
+        const generation = await generationAdapter.getById(selectedGeneration);
         const pokemonPromises = generation.pokemonSpecies.map(async (species) => {
           const extractedPokemonId = species.url.match(/(\d+)(?=\/$)/)?.[0];
           if (!extractedPokemonId) return null;
-          return (await getPokemon(extractedPokemonId)) as unknown as PokemonData;
+          return (await pokemonAdapter.getById(extractedPokemonId)) as unknown as PokemonData;
         });
         const pokemonData = await Promise.all(pokemonPromises);
         setPokemonOfGen(pokemonData.filter(Boolean) as PokemonData[]);

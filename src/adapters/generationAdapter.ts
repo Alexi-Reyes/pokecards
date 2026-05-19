@@ -1,55 +1,21 @@
 import { Generation, GenerationListItem, GenerationData } from '@/types/generation';
 import { AppConfig } from '@/config';
+import { GenerationFactory } from '@/factory/generationFactory';
 
-export const adaptGeneration = (data: GenerationData): Generation => {
-  return {
-    id: data.id,
-    name: data.name,
-    region: data.main_region.name,
-    pokemonSpecies: data.pokemon_species.map((species) => ({
-      name: species.name,
-      url: species.url,
-    })),
-  };
-};
-
-export const adaptGenerationList = (data: any): GenerationListItem[] => {
-  return data.results.map((item: any) => {
-    const id = parseInt(item.url.split('/').filter(Boolean).pop() || '0');
-    return {
-      name: item.name,
-      url: item.url,
-      id: id,
-    };
-  });
-};
-
-
-export const getGenerations = async (): Promise<GenerationListItem[]> => {
-  try {
-    const response = await fetch(`${AppConfig.localApiUrl}/generations`);
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-    const result = await response.json();
-    return adaptGenerationList(result.data);
-  } catch (error) {
-    console.error('Error fetching generations:', error);
-    return [];
-  }
-};
-
-export const getGeneration = async (id: string | number): Promise<Generation> => {
-  try {
+class GenerationAdapter {
+  async getById(id: string | number): Promise<Generation> {
     const response = await fetch(`${AppConfig.localApiUrl}/generations/${id}`);
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const result = await response.json();
-    return adaptGeneration(result.data);
-  } catch (error) {
-    console.error(`Error fetching generation ${id}:`, error);
-    throw error;
+    return GenerationFactory.createGeneration(result.data);
   }
-};
+  async getAll(): Promise<Generation[]> {
+    const response = await fetch(`${AppConfig.localApiUrl}/generations`);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const json = await response.json();
+    const result = json.data.map((item: any) => GenerationFactory.createGeneration(item));
+    return result;
+  }
+}
 
-export const getPokemonByGeneration = async (genId: string | number): Promise<string[]> => {
-  const generation = await getGeneration(genId);
-  return generation.pokemonSpecies.map((species) => species.name);
-};
+export const generationAdapter = new GenerationAdapter();
