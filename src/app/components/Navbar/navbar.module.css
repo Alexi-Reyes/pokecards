@@ -1,16 +1,16 @@
 .navbar {
-  height: 50px;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+    height: 50px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .nav-button {
-  all: unset;
-  padding: 10px;
-  font-size: 32px;
+    all: unset;
+    padding: 10px;
+    font-size: 32px;
 }
 
 /* .home-button:hover {
