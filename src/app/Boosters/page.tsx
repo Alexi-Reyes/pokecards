@@ -6,9 +6,10 @@ import Loading from '../components/Loading/loading';
 import Navbar from '../components/Navbar/navbar';
 import styles from './style.module.css';
 
-import type { GenerationBasicInfo, PokemonData, UnlockedPokemon } from '@/types';
+import type { GenerationBasicInfo, PokemonData } from '@/types';
 import { pokemonAdapter } from '@/adapters/pokemonAdapter';
 import { generationAdapter } from '@/adapters/generationAdapter';
+import { unlockedPokemonRepository } from '@/repositories/unlockedPokemonRepository';
 
 export default function Boosters() {
   const [generations, setGenerations] = useState<GenerationBasicInfo[]>([]);
@@ -66,27 +67,15 @@ export default function Boosters() {
     let selectedPokemon = [];
     const pokemonOfGenNumber = pokemonOfGen.length;
 
-    const localStorageKey = 'unlockedPokemons';
-    const stored = localStorage.getItem(localStorageKey);
-    let localStoragePokemon: UnlockedPokemon[] = [];
-    if (stored) {
-      localStoragePokemon = JSON.parse(stored) as UnlockedPokemon[];
-    }
-
     for (let i = 0; i < 4; i++) {
       const randomIndex = Math.floor(Math.random() * pokemonOfGenNumber);
       const gottenPokemon = pokemonOfGen[randomIndex];
 
-      const isAlreadyUnlocked = localStoragePokemon.some((entry) => entry.id === gottenPokemon.id);
-      if (!isAlreadyUnlocked) {
-        const is_Shiny = Math.random() <= 0.1;
-        const unlockedPokemon = {
+      if (!unlockedPokemonRepository.isUnlocked(gottenPokemon.id)) {
+        unlockedPokemonRepository.add({
           id: gottenPokemon.id,
-          is_shiny: is_Shiny,
-        };
-
-        localStoragePokemon.push(unlockedPokemon);
-        localStorage.setItem(localStorageKey, JSON.stringify(localStoragePokemon));
+          is_shiny: Math.random() <= 0.1,
+        });
       }
       selectedPokemon.push(gottenPokemon);
     }
