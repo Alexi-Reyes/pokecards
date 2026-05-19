@@ -1,31 +1,31 @@
 export interface GenerationListItem {
-    name: string;
-    url: string;
-    id: number;
+  name: string;
+  url: string;
+  id: number;
 }
 
 export interface Generation {
-    id: number;
+  id: number;
+  name: string;
+  region: string;
+  pokemonSpecies: Array<{
     name: string;
-    region: string;
-    pokemonSpecies: Array<{
-        name: string;
-        url: string;
-    }>;
+    url: string;
+  }>;
 }
 
 export interface GenerationData {
-    id: number;
+  id: number;
+  name: string;
+  main_region: {
     name: string;
-    main_region: {
-        name: string;
-    };
-    pokemon_species: Array<{
-        name: string;
-        url: string;
-    }>;
+  };
+  pokemon_species: Array<{
+    name: string;
+    url: string;
+  }>;
 }
 
 export interface GenerationBasicInfo {
-    name: string;
+  name: string;
 }
