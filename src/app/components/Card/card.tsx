@@ -5,10 +5,20 @@ import { useEffect, useState, type MouseEvent } from 'react';
 import Loading from '../Loading/loading';
 import styles from './card.module.css';
 import { AppConfig } from '@/config';
+import { withLocked, withShiny } from '@/decorators/cardDecorators';
 
-import type { PokemonData, UnlockedPokemon, ApiResponse, PokemonType } from '@/types';
+import type { PokemonData, UnlockedPokemon, ApiResponse, PokemonType, CardFrameComponent } from '@/types';
 
 type CardProps = { pokemon: string | number };
+
+const BaseCardFrame: CardFrameComponent = ({ className, onMouseMove, onMouseLeave, children }) => (
+  <div className={className} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
+    {children}
+  </div>
+);
+
+const LockedCardFrame = withLocked(BaseCardFrame);
+const ShinyCardFrame = withShiny(BaseCardFrame);
 
 export default function Card({ pokemon }: CardProps) {
   const [pokemonData, setPokemonData] = useState<PokemonData | null>(null);
@@ -54,6 +64,15 @@ export default function Card({ pokemon }: CardProps) {
     fetchData();
   }, [pokemon]);
 
+  let DecoratedCardFrame: CardFrameComponent;
+  if (!isUnlocked) {
+    DecoratedCardFrame = LockedCardFrame;
+  } else if (isShiny) {
+    DecoratedCardFrame = ShinyCardFrame;
+  } else {
+    DecoratedCardFrame = BaseCardFrame;
+  }
+
   if (loading) return <Loading />;
   if (error) return <div>Error: {error}</div>;
   if (!pokemonData) return <div>No data.</div>;
@@ -88,18 +107,15 @@ export default function Card({ pokemon }: CardProps) {
   const firstStat = stats[0];
   const secondStat = stats[1];
 
-  const cardClassName = [
-    styles.card,
-    !isUnlocked ? styles.locked : '',
-    styles[`card-type-${primaryType}`],
-    isShiny ? styles.shiny : '',
-  ]
-    .filter(Boolean)
-    .join(' ');
+  const cardClassName = [styles.card, styles[`card-type-${primaryType}`]].filter(Boolean).join(' ');
 
   return (
     <div className={styles['card-container']}>
-      <div className={cardClassName} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+      <DecoratedCardFrame
+        className={cardClassName}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      >
         <h3 className={styles['card-pokemon-name']}>{pokemonData.name}</h3>
         <div className={styles['image-container']}>
           <div className={styles['card-thumbnail-bg']}></div>
@@ -136,7 +152,7 @@ export default function Card({ pokemon }: CardProps) {
           </li>
         </ul>
         <p className={styles['pokedex-number']}>#{pokemonData.order ?? pokemonData.id}</p>
-      </div>
+      </DecoratedCardFrame>
     </div>
   );
 }
