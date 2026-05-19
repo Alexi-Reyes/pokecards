@@ -5,7 +5,7 @@ import Card from '../../../components/Card/card';
 import Loading from '../../../components/Loading/loading';
 import Navbar from '../../../components/Navbar/navbar';
 import styles from './style.module.css';
-import { AppConfig } from '@/app/config';
+import { AppConfig } from '@/config';
 
 type PokemonData = { name: string };
 type PokemonResponse = { data: PokemonData };

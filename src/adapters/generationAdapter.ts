@@ -1,4 +1,5 @@
 import { Generation, GenerationListItem, GenerationData } from '@/types/generation';
+import { AppConfig } from '@/config';
 
 export const adaptGeneration = (data: GenerationData): Generation => {
   return {
@@ -23,13 +24,10 @@ export const adaptGenerationList = (data: any): GenerationListItem[] => {
   });
 };
 
-const getBaseUrl = () => {
-  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
-};
 
 export const getGenerations = async (): Promise<GenerationListItem[]> => {
   try {
-    const response = await fetch(`${getBaseUrl()}/api/generations`);
+    const response = await fetch(`${AppConfig.localApiUrl}/generations`);
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const result = await response.json();
     return adaptGenerationList(result.data);
@@ -41,7 +39,7 @@ export const getGenerations = async (): Promise<GenerationListItem[]> => {
 
 export const getGeneration = async (id: string | number): Promise<Generation> => {
   try {
-    const response = await fetch(`${getBaseUrl()}/api/generations/${id}`);
+    const response = await fetch(`${AppConfig.localApiUrl}/generations/${id}`);
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const result = await response.json();
     return adaptGeneration(result.data);

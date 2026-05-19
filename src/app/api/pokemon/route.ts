@@ -1,4 +1,4 @@
-import { AppConfig } from '@/app/config';
+import { AppConfig } from '@/config';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
