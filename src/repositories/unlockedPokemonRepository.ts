@@ -1,4 +1,5 @@
 import type { UnlockedPokemon } from '@/types';
+import { pokemonSubject } from '@/observers/pokemonSubject';
 
 const STORAGE_KEY = 'unlockedPokemons';
 
@@ -25,9 +26,11 @@ export const unlockedPokemonRepository = {
     return readAll().some((entry) => entry.id === id);
   },
 
-  add(pokemon: UnlockedPokemon): void {
+  async add(pokemon: UnlockedPokemon): Promise<void> {
     const all = readAll();
     if (all.some((entry) => entry.id === pokemon.id)) return;
     writeAll([...all, pokemon]);
+
+    pokemonSubject.notifyPokemonUnlocked(pokemon.id);
   },
 };
