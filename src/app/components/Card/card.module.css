@@ -1,651 +1,649 @@
 .card-container {
-  perspective: 1000px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: black;
+    perspective: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  transition:
-    transform 0.1s ease-in-out,
-    box-shadow 0.1s ease-in-out;
-  transform-style: preserve-3d;
-  border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    transform-style: preserve-3d; 
+    border-radius: 18px;
 }
 
 .card:hover {
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
 }
 
 .locked {
-  filter: grayscale(100%);
+    filter: grayscale(100%);
 }
 
 .card-pokemon-name {
-  display: flex;
-  width: 100%;
-  padding-top: 18px;
-  gap: 45px;
-  margin-left: 80px;
+    display: flex;
+    width: 100%;
+    padding-top: 18px;
+    gap: 45px;
+    margin-left: 80px;
 }
 
 .image-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  height: 150px;
-  padding-top: 25px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 150px;
+    padding-top: 25px;
 }
 
 .card-thumbnail-bg {
-  background-image: url('/paysage.jpg');
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  height: 190px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: -10;
+    background-image: url('/paysage.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 190px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -10;
 }
 
 .types {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  margin-top: 25px;
-  position: relative;
-  gap: 5px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 25px;
+    position: relative;
+    gap: 5px;
 }
 
 .type {
-  width: 66px;
-  border-radius: 4px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  color: white;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.5rem;
-  text-align: center;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-  text-transform: uppercase;
-  list-style: none;
+    width: 66px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: white;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.5rem;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    text-transform: uppercase;
+    list-style: none;
 }
 
 .move {
-  display: flex;
-  justify-content: space-between;
-  padding-inline: 40px;
-  margin-top: 20px;
-  font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 40px;
+    margin-top: 20px;
+    font-weight: bold;
 }
 
 .move-number {
-  width: 20px;
+    width: 20px;
 }
 
 .pokedex-number {
-  padding-top: 65px;
-  padding-left: 170px;
-  font-size: 36px;
-  font-weight: bold;
-  font-style: italic;
+    padding-top: 65px;
+    padding-left: 170px;
+    font-size: 36px;
+    font-weight: bold;
+    font-style: italic;
 }
 
 .shiny {
-  position: relative;
-  transition: box-shadow 0.5s ease-in-out;
+    position: relative;
+    transition: box-shadow 0.5s ease-in-out;
 }
 
 .shiny::after {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
-  z-index: -1;
-  background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  border-radius: 8px;
-  filter: blur(10px);
-  opacity: 0.5;
-  animation: shiny-animation 5s linear infinite;
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    border-radius: 8px; 
+    filter: blur(10px);
+    opacity: 0.5;
+    animation: shiny-animation 5s linear infinite;    
 }
 
 /* horreur */
 @keyframes shiny-animation {
-  0% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  }
-  1% {
-    background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
-  }
-  2% {
-    background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
-  }
-  3% {
-    background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
-  }
-  4% {
-    background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
-  }
-  5% {
-    background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
-  }
-  6% {
-    background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
-  }
-  7% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  }
-  8% {
-    background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
-  }
-  9% {
-    background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
-  }
-  10% {
-    background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
-  }
-  11% {
-    background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
-  }
-  12% {
-    background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
-  }
-  13% {
-    background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
-  }
-  14% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  }
-  15% {
-    background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
-  }
-  16% {
-    background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
-  }
-  17% {
-    background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
-  }
-  18% {
-    background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
-  }
-  19% {
-    background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
-  }
-  20% {
-    background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
-  }
-  21% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  }
-  22% {
-    background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
-  }
-  23% {
-    background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
-  }
-  24% {
-    background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
-  }
-  25% {
-    background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
-  }
-  26% {
-    background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
-  }
-  27% {
-    background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
-  }
-  28% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  }
-  29% {
-    background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
-  }
-  30% {
-    background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
-  }
-  31% {
-    background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
-  }
-  32% {
-    background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
-  }
-  33% {
-    background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
-  }
-  34% {
-    background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
-  }
-  35% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  }
-  36% {
-    background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
-  }
-  37% {
-    background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
-  }
-  38% {
-    background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
-  }
-  39% {
-    background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
-  }
-  40% {
-    background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
-  }
-  41% {
-    background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
-  }
-  42% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  }
-  43% {
-    background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
-  }
-  44% {
-    background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
-  }
-  45% {
-    background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
-  }
-  46% {
-    background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
-  }
-  47% {
-    background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
-  }
-  48% {
-    background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
-  }
-  49% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  }
-  50% {
-    background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
-  }
-  51% {
-    background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
-  }
-  52% {
-    background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
-  }
-  53% {
-    background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
-  }
-  54% {
-    background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
-  }
-  55% {
-    background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
-  }
-  56% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  }
-  57% {
-    background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
-  }
-  58% {
-    background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
-  }
-  59% {
-    background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
-  }
-  60% {
-    background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
-  }
-  61% {
-    background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
-  }
-  62% {
-    background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
-  }
-  63% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  }
-  64% {
-    background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
-  }
-  65% {
-    background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
-  }
-  66% {
-    background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
-  }
-  67% {
-    background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
-  }
-  68% {
-    background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
-  }
-  69% {
-    background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
-  }
-  70% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  }
-  71% {
-    background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
-  }
-  72% {
-    background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
-  }
-  73% {
-    background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
-  }
-  74% {
-    background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
-  }
-  75% {
-    background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
-  }
-  76% {
-    background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
-  }
-  77% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  }
-  78% {
-    background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
-  }
-  79% {
-    background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
-  }
-  80% {
-    background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
-  }
-  81% {
-    background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
-  }
-  82% {
-    background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
-  }
-  83% {
-    background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
-  }
-  84% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  }
-  85% {
-    background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
-  }
-  86% {
-    background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
-  }
-  87% {
-    background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
-  }
-  88% {
-    background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
-  }
-  89% {
-    background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
-  }
-  90% {
-    background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
-  }
-  91% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  }
-  92% {
-    background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
-  }
-  93% {
-    background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
-  }
-  94% {
-    background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
-  }
-  95% {
-    background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
-  }
-  96% {
-    background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
-  }
-  97% {
-    background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
-  }
-  98% {
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  }
-  99% {
-    background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
-  }
-  100% {
-    background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
-  }
+    0% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    1% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    2% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    3% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    4% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    5% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    6% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    7% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    8% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    9% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    10% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    11% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    12% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    13% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    14% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    15% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    16% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    17% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    18% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    19% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    20% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    21% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    22% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    23% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    24% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    25% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    26% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    27% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    28% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    29% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    30% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    31% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    32% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    33% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    34% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    35% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    36% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    37% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    38% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    39% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    40% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    41% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    42% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    43% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    44% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    45% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    46% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    47% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    48% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    49% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    50% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    51% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    52% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    53% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    54% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    55% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    56% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    57% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    58% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    59% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    60% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    61% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    62% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    63% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    64% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    65% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    66% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    67% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    68% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    69% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    70% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    71% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    72% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    73% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    74% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    75% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    76% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    77% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    78% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    79% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    80% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    81% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    82% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    83% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    84% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    85% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    86% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    87% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    88% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    89% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    90% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    91% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    92% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    93% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
+    94% {
+        background: linear-gradient(45deg, green, blue, indigo, violet, red, orange, yellow);
+    }
+    95% {
+        background: linear-gradient(45deg, blue, indigo, violet, red, orange, yellow, green);
+    }
+    96% {
+        background: linear-gradient(45deg, indigo, violet, red, orange, yellow, green, blue);
+    }
+    97% {
+        background: linear-gradient(45deg, violet, red, orange, yellow, green, blue, indigo);
+    }
+    98% {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    99% {
+        background: linear-gradient(45deg, orange, yellow, green, blue, indigo, violet, red);
+    }
+    100% {
+        background: linear-gradient(45deg, yellow, green, blue, indigo, violet, red, orange);
+    }
 }
 
 /* Card Type */
 
 .card-type-fire {
-  background-image: url('/Cards-template/Pokemon-feu.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/Pokemon-feu.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
-
+  
 .card-type-water {
-  background-image: url('/Cards-template/water.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/water.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
-
+  
 .card-type-grass {
-  background-image: url('/Cards-template/plant.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/plant.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
 
 .card-type-electric {
-  background-image: url('/Cards-template/electric.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/electric.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
 
 .card-type-poison {
-  background-image: url('/Cards-template/psychic.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/psychic.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
 
 .card-type-normal {
-  background-image: url('/Cards-template/normal.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/normal.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
 
 .card-type-rock {
-  background-image: url('/Cards-template/rock.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/rock.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
 
 .card-type-ice {
-  background-image: url('/Cards-template/Pokemon-eau.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/Pokemon-eau.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
 
 .card-type-fighting {
-  background-image: url('/Cards-template/rock.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/rock.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
 
 .card-type-ground {
-  background-image: url('/Cards-template/rock.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/rock.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
 
 .card-type-flying {
-  background-image: url('/Cards-template/plant.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/plant.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
 
 .card-type-psychic {
-  background-image: url('/Cards-template/psychic.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/psychic.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
 
 .card-type-bug {
-  background-image: url('/Cards-template/plant.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/plant.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
 
 .card-type-ghost {
-  background-image: url('/Cards-template/psychic.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/psychic.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
 
 .card-type-dragon {
-  background-image: url('/Cards-template/dragon.png');
-  color: whitesmoke;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/dragon.png');
+    color: whitesmoke;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
 
 .card-type-dark {
-  background-image: url('/Cards-template/dark.jpg');
-  color: whitesmoke;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/dark.jpg');
+    color: whitesmoke;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
 
 .card-type-steel {
-  background-image: url('/Cards-template/normal.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/normal.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
 
 .card-type-fairy {
-  background-image: url('/Cards-template/normal.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 320px;
-  height: 450px;
+    background-image: url('/Cards-template/normal.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 320px;
+    height: 450px;
 }
 
 /* Types icons */
 
 .type-normal {
-  background-color: #aa9;
+    background-color: #aa9;
 }
 
 .type-fire {
-  background-color: #f42;
+    background-color: #f42;
 }
 
 .type-water {
-  background-color: #39f;
+    background-color: #39f;
 }
 
 .type-electric {
-  background-color: #fc3;
+    background-color: #fc3;
 }
 
 .type-grass {
-  background-color: #7c5;
+    background-color: #7c5;
 }
 
 .type-ice {
-  background-color: #6cf;
+    background-color: #6cf;
 }
 
 .type-fighting {
-  background-color: #b54;
+    background-color: #b54;
 }
 
 .type-poison {
-  background-color: #a59;
+    background-color: #a59;
 }
 
 .type-ground {
-  background-color: #db5;
+    background-color: #db5;
 }
 
 .type-flying {
-  background-color: #89f;
+    background-color: #89f;
 }
 
 .type-psychic {
-  background-color: #f59;
+    background-color: #f59;
 }
 
 .type-bug {
-  background-color: #ab2;
+    background-color: #ab2;
 }
 
 .type-rock {
-  background-color: #ba6;
+    background-color: #ba6;
 }
 
 .type-ghost {
-  background-color: #66b;
+    background-color: #66b;
 }
 
 .type-dragon {
-  background-color: #76e;
+    background-color: #76e;
 }
 
 .type-dark {
-  background-color: #754;
+    background-color: #754;
 }
 
 .type-steel {
-  background-color: #aab;
+    background-color: #aab;
 }
 
 .type-fairy {
-  background-color: #e9e;
+    background-color: #e9e;
 }

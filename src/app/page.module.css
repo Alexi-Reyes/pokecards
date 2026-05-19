@@ -5,17 +5,20 @@
   font-size: 96px;
   color: white;
   background-color: white;
-  text-shadow:
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;
-  background-image: url('../../public/home-banner.jpg');
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  background-image: url("../../public/home-banner.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
   height: calc(100vh - 50px);
 }
+
+
+
+
+
+
+
 
 /* next css */
 .page {
