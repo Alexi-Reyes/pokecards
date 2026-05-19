@@ -3,13 +3,13 @@ import Card from '../../components/Card/card';
 import Navbar from '../../components/Navbar/navbar';
 import Selector from '../../components/Selector/selector';
 import styles from './style.module.css';
-
-import { getPokemonByGeneration, getGenerations } from '@/adapters/generationAdapter';
+import { generationAdapter } from '@/adapters/generationAdapter';
+import { pokemonAdapter } from '@/adapters/pokemonAdapter';
 
 export default async function Collection({ params }: { params: { gen: string } }) {
   const { gen } = params;
-  const generations = await getGenerations();
-  const pokemonOfGen = gen !== '0' ? await getPokemonByGeneration(gen) : [];
+  const generations = await generationAdapter.getAll();
+  const pokemonOfGen = gen !== '0' ? await pokemonAdapter.getByGeneration(await generationAdapter.getById(gen)) : [];
 
   return (
     <>
